@@ -49,7 +49,7 @@ CREATE TABLE ItemCarteira
 	CodigoItemCarteira int NOT NULL IDENTITY(1,1),
 	Endereco varchar(100) NOT NULL,
 	CodigoMoeda varchar(3) NOT NULL,
-	Quantidade decimal,
+	Quantidade float,
 	PRIMARY KEY (CodigoItemCarteira),
 	FOREIGN KEY (Endereco) REFERENCES Carteira (Endereco),
 	FOREIGN KEY (CodigoMoeda) REFERENCES Moeda (CodigoMoeda)
@@ -61,7 +61,7 @@ CREATE TABLE ParesMoedas
 (
 	CodigoMoedaBase varchar(3) NOT NULL,
 	CodigoMoedaCotacao varchar(3) NOT NULL,
-	Valor decimal NOT NULL,
+	Valor float NOT NULL,
 	PRIMARY KEY (Valor),
 	FOREIGN KEY (CodigoMoedaBase) REFERENCES Moeda (CodigoMoeda),
 	FOREIGN KEY (CodigoMoedaCotacao) REFERENCES Moeda (CodigoMoeda)
