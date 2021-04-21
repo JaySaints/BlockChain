@@ -1,7 +1,10 @@
--- PROCEDURE CriaCadastroCliente --> Tem a Finalidade de facilita a inclus„o de um novo elemento na tabela cliente. Sendo que na criaÁ„o do elemento
--- o campo PassHash È preenchido com o Hash da senha, utilizando a funÁ„o HASHBYTES.
--- A funÁ„o HASHBYTES cria uma assinatura da senha em MD5;
--- A funÁ„o CONVERT est· convertendo o conteudo da funÁ„o HASHBYTES que È do tipo VarBinary para o tipo VarChar;
+-- Seleciona o Banco de dados DB_BlockChain
+USE DB_BlockChain
+GO
+-- PROCEDURE CriaCadastroCliente --> Tem a Finalidade de facilita a inclus√£o de um novo elemento na tabela cliente. Sendo que na cria√ß√£o do elemento
+-- o campo PassHash √© preenchido com o Hash da senha, utilizando a fun√ß√£o HASHBYTES.
+-- A fun√ß√£o HASHBYTES cria uma assinatura da senha em MD5;
+-- A fun√ß√£o CONVERT est√° convertendo o conteudo da fun√ß√£o HASHBYTES que √© do tipo VarBinary para o tipo VarChar;
 -- CONVERT(VARCHAR(32), HASHBYTES('MD5', @senha), 2)
 CREATE PROCEDURE CriaCadastroCliente(@nome VARCHAR(100), @email VARCHAR(100), @celular VARCHAR(20), @senha VARCHAR(34), @moeda VARCHAR(3))
 AS
@@ -11,7 +14,7 @@ INSERT INTO Cliente
 RETURN
 GO
 
--- Chama a PROCEDURE CriaCadastroCliente e passa os valores para inserÁ„o dos elementos na tabela Cliente;
+-- Chama a PROCEDURE CriaCadastroCliente e passa os valores para inser√ß√£o dos elementos na tabela Cliente;
 EXEC CriaCadastroCliente 'JULIANA PAES', 'JUJU85@HOTMAIL.COM', '41 98756-2399', 'paz85', 'USD'
 GO
 EXEC CriaCadastroCliente 'PABLO JOTA SANTOS', 'JOTA@JOTAMAIL.COM.BR', '22 99001-2235', 'abc123', 'USD'
