@@ -1,5 +1,5 @@
 -- Cria banco de dados (DB_BlockChain)com: 
--- Arquivo Prim·rio (DB_BlockChain.mdf) com 4MB e crece a cada 1MB
+-- Arquivo Prim√°rio (DB_BlockChain.mdf) com 3MB e crece a cada 1MB
 -- Arquivo Log (LOG_BlockChain.ldf) com 1MB e crece a cada 1MB
 CREATE DATABASE	DB_BlockChain 
 ON PRIMARY
