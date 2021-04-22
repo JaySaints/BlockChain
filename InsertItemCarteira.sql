@@ -3,10 +3,10 @@ USE DB_BlockChain
 GO
 -- PROCEDURE InsereItensCarteira tem a finalidade de inserir elementos na tabela ItemCarteira
 -- É passado 3 parametros para a procedure:
--- 1° @codCliente = Informar o CodigoCliente que contem o identificador do cliente informação contida na tabela Cleinte
+-- 1° @CodigoCliente = Informar o CodigoCliente que contem o identificador do cliente informação contida na tabela Cleinte
 -- uma vez passado o codigo do cliente para localizar o endereço da carteira que sera refistrado na tabela ItemCarteira.
--- 2° @codMoeda = Iformar o codigo da moeda que o cliente esta adiquirindo, codigo da moeda pode ser obtido na tabela Moeda.
--- 3° @quantidade = Informar a quantidade de daquele tipo de moeda que o cliente esta adiquirindo.
+-- 2° @CodigoMoeda = Iformar o codigo da moeda que o cliente esta adiquirindo, codigo da moeda pode ser obtido na tabela Moeda.
+-- 3° @Quantidade = Informar a quantidade de daquele tipo de moeda que o cliente esta adiquirindo.
 CREATE PROCEDURE InsereItensCarteira2(@CodigoCliente INT, @CodigoMoeda VARCHAR(3), @Quantidade FLOAT)
 AS	
 	DECLARE @Endereco VARCHAR(32);	
@@ -39,7 +39,7 @@ AS
 	END
 RETURN
 
--- Parametros da Procedure --> InsereItensCarteira CodCliente, CodMoeda, Quantidade 
+-- Parametros da Procedure --> InsereItensCarteira CodigoCliente, CodigoMoeda, Quantidade 
 -- Inserindo itens na carteira do cliente de CodigoCliente = 1 
 EXEC InsereItensCarteira 1, 'BTC', 0.23
 GO
