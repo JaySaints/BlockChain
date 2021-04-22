@@ -2,61 +2,41 @@
 USE DB_BlockChain
 GO
 -- PROCEDURE InsereItensCarteira tem a finalidade de inserir elementos na tabela ItemCarteira
--- √â passado 3 parametros para a procedure:
--- 1¬∞ @codCliente = Informar o CodigoCliente que contem o identificador do cliente informa√ß√£o contida na tabela Cleinte
--- uma vez passado o codigo do cliente para localizar o endere√ßo da carteira que sera refistrado na tabela ItemCarteira.
--- 2¬∞ @codMoeda = Iformar o codigo da moeda que o cliente esta adiquirindo, codigo da moeda pode ser obtido na tabela Moeda.
--- 3¬∞ @quantidade = Informar a quantidade de daquele tipo de moeda que o cliente esta adiquirindo.
-CREATE PROCEDURE InsereItensCarteira(@CodigoCliente INT, @CodigoMoeda VARCHAR(3), @Quantidade FLOAT)
+-- … passado 3 parametros para a procedure:
+-- 1∞ @codCliente = Informar o CodigoCliente que contem o identificador do cliente informaÁ„o contida na tabela Cleinte
+-- uma vez passado o codigo do cliente para localizar o endereÁo da carteira que sera refistrado na tabela ItemCarteira.
+-- 2∞ @codMoeda = Iformar o codigo da moeda que o cliente esta adiquirindo, codigo da moeda pode ser obtido na tabela Moeda.
+-- 3∞ @quantidade = Informar a quantidade de daquele tipo de moeda que o cliente esta adiquirindo.
+CREATE PROCEDURE InsereItensCarteira2(@CodigoCliente INT, @CodigoMoeda VARCHAR(3), @Quantidade FLOAT)
 AS	
 	DECLARE @Endereco VARCHAR(32);	
-	DECLARE @ItemAtual VARCHAR(3);	
-	DECLARE @Flag INT;
+	DECLARE @ItemAtual VARCHAR(3);		
 	DECLARE @QuantidadeAtual FLOAT;
-	-- Flag de controle para condi√ß√£o de nova inser√ß√£o ou update na tabela. 0 = Inser novo elemento na tabela | 1 = Fazer update no elemento da tabela.
-	SET @Flag = 0;
-
-	-- Para facilitar √© mais viavel informar o CodigoCliente do que o Endereco da Carteira.
-	-- Aqui √© informado o CodigoCliente para obter o Endereco da carteira do respectivo cliente.
+	
+	-- Para facilitar È mais viavel informar o CodigoCliente do que o Endereco da Carteira.
+	-- Aqui È informado o CodigoCliente para obter o Endereco da carteira do respectivo cliente.
 	SELECT  @Endereco = Endereco FROM Carteira WHERE CodigoCliente = @CodigoCliente;
 	
-	-- Aqui √© criado um cursor para que seja posivel navegar apenas nos itens da carteira do respectivo cliente,
-	-- o cursor ir√° seta apenas os itens que der match com a query
-	DECLARE CursorItens CURSOR FOR 
-		SELECT CodigoMoeda FROM ItemCarteira WHERE Endereco = @Endereco;
-	
-	-- Abre o cursor
-	OPEN CursorItens;
+	-- Nesse ponto È feita uma query para pegar a quantidade atual do item e È passado para a v·riavel @QuantidadeAtual.
+	SELECT @QuantidadeAtual = Quantidade FROM ItemCarteira 
+		WHERE Endereco = @Endereco AND CodigoMoeda = @ItemAtual; 
 
-	-- Aqui √© passado um dos elementos do cursor para a variavel @ItemAtual
-	FETCH NEXT FROM CursorItens INTO @ItemAtual;
+	-- ApÛs ter obtido a quantidade atual do item È somada a quantidade atual com a quantidade desejada a ser inserida.
+	-- Se o tipo do item J¡ EXISTIR na carteira do cliente ser· realizado o update no valor da quantidade.
+	-- Se o tipo do item N√O EXISTIR na carteira n„o sera feito nada.
+	UPDATE ItemCarteira 
+		SET Quantidade = (@QuantidadeAtual + @Quantidade) 
+			WHERE Endereco = @Endereco AND CodigoMoeda = @ItemAtual; 
 
-	-- La√ßo de repeti√ß√£o para verificar todos os itens no cursor
-	WHILE @@FETCH_STATUS = 0 
-		BEGIN	
-			-- Condi√ß√£o para verificar se o item desejado a se inserido na carteira ja existe na carteira do respectivo cliente.
-			-- Se o item ja exitir n√£o podera ser criado um novo item do mesmo tipo.
-			-- Se o item ja exitir dever√° pegar a quantidade atual do item e somar com a nova quantidade a ser inserida e atualizar o valor na tabela ItemCarteira.
-			IF @ItemAtual = @CodigoMoeda			
-			BEGIN				
-				-- Nesse ponto √© feita uma query para pegar a quantidade atual do item e √© passado para a v√°riavel @QuantidadeAtual.
-				SELECT @QuantidadeAtual = Quantidade FROM ItemCarteira WHERE Endereco = @Endereco AND CodigoMoeda = @ItemAtual; 
-				-- Ap√≥s ter obtido a quantidade atual do item √© somada a quantidade atual com a quantidade desejada a ser inserida.
-				UPDATE ItemCarteira SET Quantidade = (@QuantidadeAtual + @Quantidade) WHERE Endereco = @Endereco AND CodigoMoeda = @ItemAtual; 
-				--PRINT('Item Existente!!!')
-				SET @flag = 1;
-			END
-			FETCH NEXT FROM CursorItens INTO @ItemAtual;
-		END
-	IF @Flag = 0
+	-- No bloco acima foi tentado realizar o update da tupla se o item existente na carteira. 
+	-- O comando @@ROWCOUNT verifica se o comando UPDATE deu certo ou falha. 
+	-- Se o update deu certo È por que o item ja existia na carteira do cliente e foi possivel atualizar a quantidade;
+	-- Se o update deu fala isso quer dizer que o item n„o existia na carteira do cliente.
+	-- Como o item n„o existia na carteira agora sera inserido.
+	IF (@@ROWCOUNT = 0)
 	BEGIN
-		INSERT INTO ItemCarteira VALUES (@Endereco, @CodigoMoeda, @Quantidade);
-		--PRINT('Item Adicionado a Cartira!!!');
+		INSERT INTO ItemCarteira VALUES (@Endereco, @CodigoMoeda, @Quantidade);		
 	END
-	-- Fecha o cursor CursorItens;
-	CLOSE CursorItens;	
-	-- Desaloca o CursoItens da mem√≥ria;
-	DEALLOCATE CursorItens;	
 RETURN
 
 -- CodCliente, CodMoeda, Quantidade 
