@@ -1,4 +1,4 @@
-### Autor: Pablo Juliano Santos --> @jaysaints
+Autor: Pablo Juliano Santos --> @jaysaints
 # BlockChain
 Banco de dados SQL Server 2008
 
@@ -15,3 +15,7 @@ Objetivos:
 - Criação de outro script para desfazer todas as ações de criação anteriores (rollback). Atenção 
 para a consistência dos dados.
 
+### LISTA DE PROCEDURES CRIADAS
+- CriaCarteira (@corretora INT, @cliente INT)
+- CriaCadastroCliente(@nome VARCHAR(100), @email VARCHAR(100), @celular VARCHAR(20), @senha VARCHAR(34), @moeda VARCHAR(3))
+- InsereItensCarteira(@CodigoCliente INT, @CodigoMoeda VARCHAR(3), @Quantidade FLOAT)
