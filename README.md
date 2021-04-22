@@ -8,7 +8,7 @@ Objetivos:
 - Criar um ESQUEMA para conter as tabelas do banco de dados.
 - Criação das TABELAS contidas no diagrama relacional. --> OK
 - Criação dos ÍNDICES para as colunas que serão mais consultadas.
-- INSERIR dados consistentes (popular) nas tabelas recém-criadas.
+- INSERIR dados consistentes (popular) nas tabelas recém-criadas. --> OK
 - LISTAR os dados (comando SELECT) inseridos nas tabelas recém-criadas.
 - Criar consulta dos dados como VISÕES e FUNÇÕES.
 - Listar saldo atual por usuário cadastrado, mostrando a descrição da moeda e o valor da carteira.
