@@ -10,6 +10,6 @@ Objetivos:
 - Criação dos ÍNDICES para as colunas que serão mais consultadas.
 - INSERIR dados consistentes (popular) nas tabelas recém-criadas. --> OK
 - LISTAR os dados (comando SELECT) inseridos nas tabelas recém-criadas. --> OK
-- Criar consulta dos dados como VISÕES e FUNÇÕES. 
+- Criar consulta dos dados como VISÕES e FUNÇÕES. --> OK
 - Listar saldo atual por usuário cadastrado, mostrando a descrição da moeda e o valor da carteira. --> OK
 - Criação de outro script para desfazer todas as ações de criação anteriores (rollback). 
