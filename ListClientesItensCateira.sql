@@ -13,4 +13,5 @@ SELECT Cliente.CodigoCliente , Cliente.Nome, ItemCarteira.CodigoMoeda, ItemCarte
 		ItemCarteira ON ItemCarteira.Endereco = Carteira.Endereco	
 	
 -- Chama a view criada e ordena a saida para agrupar os intens de cada cliente
-SELECT * FROM ListaItensCliente ORDER BY(CodigoCliente)
+SELECT * FROM ListaItensCliente WHERE CodigoCliente = 1
+ORDER BY(CodigoCliente)
