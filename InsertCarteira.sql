@@ -1,10 +1,10 @@
 -- Seleciona o Banco de dados DB_BlockChain
 USE DB_BlockChain
 GO
--- PROCEDURE CriaCarteira  recebe dois valores do tipo inteiro--> Tem a finalidade de facilita a inserÁ„o de novos elementos na tabela CARTEIRA
--- No campo EndereÁo que tem como objetivo identificar a carteira na blockchain, seu valor È composto por um hash de 32bits.
--- O valor para calcular o hash È proposto por uma funÁaı randomica que agrega seu valor a variavel @rand que È passada como valor para funÁ„o HASHBYTES
-CREATE PROCEDURE CriaCarteira (@corretora INT, @cliente INT)
+-- PROCEDURE CriaCarteira  recebe dois valores do tipo inteiro--> Tem a finalidade de facilita a inser√ß√£o de novos elementos na tabela CARTEIRA
+-- No campo Endere√ßo que tem como objetivo identificar a carteira na blockchain, seu valor √© composto por um hash de 32bits.
+-- O valor para calcular o hash √© proposto por uma fun√ßa√µ randomica que agrega seu valor a variavel @rand que √© passada como valor para fun√ß√£o HASHBYTES
+CREATE PROCEDURE sch_blockchain.CriaCarteira (@corretora INT, @cliente INT)
 AS
 	DECLARE @endereco VARCHAR(32)
 	DECLARE @rand VARCHAR(32)
@@ -15,8 +15,8 @@ AS
 RETURN
 GO
 -- Chama a PROCEDURE CriaCarteira e passa dois parametros. 
--- 1∞ parametro È o CodigoCorretora que se encontra na tabela Corretora
--- 2∞ parametro È o CodigoCliente que se encontra na tabela Cliente
+-- 1¬∞ parametro √© o CodigoCorretora que se encontra na tabela Corretora
+-- 2¬∞ parametro √© o CodigoCliente que se encontra na tabela Cliente
 EXEC CriaCarteira 2, 1
 GO
 EXEC CriaCarteira 2, 5
