@@ -1,8 +1,13 @@
 -- Seleciosa o Banco de dados a ser usado
 USE DB_BlockChain
 GO
+-- Cria um novo schema para as tables, functions, views e procedures que fazem parte do sistema BlockChain
+-- Está sendo criado um schema sem um usuário especifico, então o dono deste schema é o próprio usuário que a criar
+CREATE SCHEMA sch_blockchain
+GO
+
 -- Cria trabela CORRETORA
-CREATE TABLE Corretora
+CREATE TABLE sch_blockchain.Corretora
 (
 	CodigoCorretora int NOT NULL IDENTITY(1,1),
 	Nome varchar(100),
@@ -10,7 +15,7 @@ CREATE TABLE Corretora
 )
 GO
 -- Cria tabela MOEDA
-CREATE TABLE Moeda
+CREATE TABLE sch_blockchain.Moeda
 (
 	CodigoMoeda varchar(3) NOT NULL,
 	Nome varchar(100),
@@ -18,7 +23,7 @@ CREATE TABLE Moeda
 )
 GO
 -- Cria tabela CLIENTE. Recebe uma chave estrangeira da tabela Moeda, alocando-a no atributo MoedaPrincipal.
-CREATE TABLE Cliente
+CREATE TABLE sch_blockchain.Cliente
 (
 	CodigoCliente int NOT NULL IDENTITY(1,1),
 	Nome varchar(100),
@@ -32,7 +37,7 @@ CREATE TABLE Cliente
 GO
 -- Cria tabela CARTEIRA. Recebe uma chave estrangeira da tabela Corretora alocando no atributo CodigoCorretora e
 -- uma chave da tabela Cliente e alocando-a no atributo CodigoCLiente.
-CREATE TABLE Carteira
+CREATE TABLE sch_blockchain.Carteira
 (
 	Endereco varchar(100) NOT NULL,
 	CodigoCorretora int NOT NULL,
@@ -44,7 +49,7 @@ CREATE TABLE Carteira
 GO
 -- Cria tabela ITEM CARTEIRA. Recebe uma chave estrangeira da tabela carteira alocando no atributo Endereço e 
 -- uma chave da tabela Moeda alocando no atributo CodigoMoeda
-CREATE TABLE ItemCarteira
+CREATE TABLE sch_blockchain.ItemCarteira
 (
 	CodigoItemCarteira int NOT NULL IDENTITY(1,1),
 	Endereco varchar(100) NOT NULL,
@@ -57,7 +62,7 @@ CREATE TABLE ItemCarteira
 GO
 -- Cria tabela PARES MOEDAS. Recebe duas chaves estrangeiras da tabela Moeda, 
 -- um sendo alocada no atributo CodigoMoedaBase e a outra no atributo CodigoMoedaCotacao
-CREATE TABLE ParesMoedas
+CREATE TABLE sch_blockchain.ParesMoedas
 (
 	CodigoMoedaBase varchar(3) NOT NULL,
 	CodigoMoedaCotacao varchar(3) NOT NULL,
@@ -66,3 +71,4 @@ CREATE TABLE ParesMoedas
 	FOREIGN KEY (CodigoMoedaBase) REFERENCES Moeda (CodigoMoeda),
 	FOREIGN KEY (CodigoMoedaCotacao) REFERENCES Moeda (CodigoMoeda)
 )
+
