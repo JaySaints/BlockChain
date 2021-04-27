@@ -1,10 +1,10 @@
 -- Seleciosa o Banco de dados a ser usado
 USE DB_BlockChain
 GO
--- Cria função para pegar a cotação atual da moeda desejada na tabela ParesMoedas. É passado dois parametros: 
--- 1° é passado o código da moeda base
--- 2° é passado o código da moeda principal do cliente
-CREATE FUNCTION CotacaoAtual(@CodMoedaBase VARCHAR(3), @CodMoedaPrincipal VARCHAR(3))
+-- Cria funÃ§Ã£o para pegar a cotaÃ§Ã£o atual da moeda desejada na tabela ParesMoedas. Ã‰ passado dois parametros: 
+-- 1Â° Ã© passado o cÃ³digo da moeda base
+-- 2Â° Ã© passado o cÃ³digo da moeda principal do cliente
+CREATE FUNCTION sch_blockchain.CotacaoAtual(@CodMoedaBase VARCHAR(3), @CodMoedaPrincipal VARCHAR(3))
 RETURNS FLOAT
 AS 
 BEGIN
@@ -15,6 +15,6 @@ BEGIN
 	RETURN @ValorCotacao
 END
 
--- Chamada da função para obter o valor da moeda Ethereum
+-- Chamada da funÃ§Ã£o para obter o valor da moeda Ethereum
 --SELECT dbo.CotacaoAtual('ETH', 'USD')
 
