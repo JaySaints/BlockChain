@@ -6,7 +6,7 @@ GO
 -- A função HASHBYTES cria uma assinatura da senha em MD5;
 -- A função CONVERT está convertendo o conteudo da função HASHBYTES que é do tipo VarBinary para o tipo VarChar;
 -- CONVERT(VARCHAR(32), HASHBYTES('MD5', @senha), 2)
-CREATE PROCEDURE CriaCadastroCliente(@nome VARCHAR(100), @email VARCHAR(100), @celular VARCHAR(20), @senha VARCHAR(34), @moeda VARCHAR(3))
+CREATE PROCEDURE sch_blockchain.CriaCadastroCliente(@nome VARCHAR(100), @email VARCHAR(100), @celular VARCHAR(20), @senha VARCHAR(34), @moeda VARCHAR(3))
 AS
 INSERT INTO Cliente 
 	VALUES 
