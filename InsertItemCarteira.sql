@@ -7,7 +7,7 @@ GO
 -- uma vez passado o codigo do cliente para localizar o endereço da carteira que sera refistrado na tabela ItemCarteira.
 -- 2° @CodigoMoeda = Iformar o codigo da moeda que o cliente esta adiquirindo, codigo da moeda pode ser obtido na tabela Moeda.
 -- 3° @Quantidade = Informar a quantidade de daquele tipo de moeda que o cliente esta adiquirindo.
-CREATE PROCEDURE InsereItensCarteira(@CodigoCliente INT, @CodigoMoeda VARCHAR(3), @Quantidade FLOAT)
+CREATE PROCEDURE sch_blockchain.InsereItensCarteira(@CodigoCliente INT, @CodigoMoeda VARCHAR(3), @Quantidade FLOAT)
 AS	
 	DECLARE @Endereco VARCHAR(32);	
 	DECLARE @ItemAtual VARCHAR(3);		
