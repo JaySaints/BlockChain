@@ -24,7 +24,7 @@ GO
 INSERT INTO Corretora VALUES ('CoinBase')
 GO
 
---Insere os PARES DE MOEDAS com o valor das cotações referente ao dia 18/04/21
+--Insere os PARES DE MOEDAS com o valor das cotaÃ§Ãµes referente ao dia 18/04/21
 INSERT INTO ParesMoedas (CodigoMoedaBase, CodigoMoedaCotacao, Valor) VALUES ('USD', 'BRL', 5.59)
 GO
 INSERT INTO ParesMoedas (CodigoMoedaBase, CodigoMoedaCotacao, Valor) VALUES ('BTC', 'USD', 54015.11)
