@@ -4,12 +4,12 @@ GO
 -- Cria função para pegar a cotação atual da moeda desejada na tabela ParesMoedas. É passado dois parametros: 
 -- 1° é passado o código da moeda base
 -- 2° é passado o código da moeda principal do cliente
-CREATE FUNCTION sch_blockchain.CotacaoAtual(@CodMoedaBase VARCHAR(3), @CodMoedaPrincipal VARCHAR(3))
+CREATE FUNCTION sch_bkc.CotacaoAtual(@CodMoedaBase VARCHAR(3), @CodMoedaPrincipal VARCHAR(3))
 RETURNS FLOAT
 AS 
 BEGIN
 	DECLARE @ValorCotacao FLOAT;
-	SELECT @ValorCotacao = Valor FROM sch_blockchain.ParesMoedas 
+	SELECT @ValorCotacao = Valor FROM sch_bkc.ParesMoedas 
 		WHERE CodigoMoedaBase = @CodMoedaBase 
 			AND CodigoMoedaCotacao = @CodMoedaPrincipal
 	RETURN @ValorCotacao

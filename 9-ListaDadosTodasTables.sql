@@ -2,15 +2,15 @@
 USE DB_BlockChain
 GO
 -- Lista o conteudo de todas as tabelas do banco de dados DB_BlockChain
-SELECT * FROM sch_blockchain.Corretora
+SELECT * FROM sch_bkc.Corretora
 GO
-SELECT * FROM sch_blockchain.Moeda
+SELECT * FROM sch_bkc.Moeda
 GO
-SELECT * FROM sch_blockchain.ParesMoedas
+SELECT * FROM sch_bkc.ParesMoedas
 GO
-SELECT * FROM sch_blockchain.Cliente
+SELECT * FROM sch_bkc.Cliente
 GO
-SELECT * FROM sch_blockchain.Carteira
+SELECT * FROM sch_bkc.Carteira
 GO
-SELECT * FROM sch_blockchain.ItemCarteira
+SELECT * FROM sch_bkc.ItemCarteira
 GO

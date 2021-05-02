@@ -7,7 +7,7 @@ GO
 -- uma vez passado o codigo do cliente para localizar o endereço da carteira que sera refistrado na tabela ItemCarteira.
 -- 2° @codMoeda = Iformar o codigo da moeda que o cliente esta adiquirindo, codigo da moeda pode ser obtido na tabela Moeda.
 -- 3° @quantidade = Informar a quantidade de daquele tipo de moeda que o cliente esta adiquirindo.
-CREATE PROCEDURE sch_blockchain.InsereItensCarteira(@CodigoCliente INT, @CodigoMoeda VARCHAR(3), @Quantidade FLOAT)
+CREATE PROCEDURE sch_bkc.InsereItensCarteira(@CodigoCliente INT, @CodigoMoeda VARCHAR(3), @Quantidade FLOAT)
 AS	
 	DECLARE @Endereco VARCHAR(32);	
 	DECLARE @ItemAtual VARCHAR(3);		
@@ -15,19 +15,19 @@ AS
 	
 	-- Para facilitar é mais viavel informar o CodigoCliente do que o Endereco da Carteira.
 	-- Aqui é informado o CodigoCliente para obter o Endereco da carteira do respectivo cliente.
-	SELECT  @Endereco = Endereco FROM sch_blockchain.Carteira 
+	SELECT  @Endereco = Endereco FROM sch_bkc.Carteira 
 		WHERE CodigoCliente = @CodigoCliente
 	
 	
 	-- Nesse ponto é feita uma query para pegar a quantidade atual do item e é passado para a váriavel @QuantidadeAtual.
-	SELECT @QuantidadeAtual = Quantidade FROM sch_blockchain.ItemCarteira 
+	SELECT @QuantidadeAtual = Quantidade FROM sch_bkc.ItemCarteira 
 		WHERE Endereco = @Endereco AND CodigoMoeda = @ItemAtual
 	
 
 	-- Após ter obtido a quantidade atual do item é somada a quantidade atual com a quantidade desejada a ser inserida.
 	-- Se o tipo do item JÁ EXISTIR na carteira do cliente será realizado o update no valor da quantidade.
 	-- Se o tipo do item NÃO EXISTIR na carteira não sera feito nada.
-	UPDATE sch_blockchain.ItemCarteira 
+	UPDATE sch_bkc.ItemCarteira 
 		SET Quantidade = (@QuantidadeAtual + @Quantidade) 
 			WHERE Endereco = @Endereco AND CodigoMoeda = @ItemAtual
 		
@@ -39,7 +39,7 @@ AS
 	-- Como o item não existia na carteira agora sera inserido.
 	IF (@@ROWCOUNT = 0)
 	BEGIN
-		INSERT INTO sch_blockchain.ItemCarteira VALUES (@Endereco, @CodigoMoeda, @Quantidade)		
+		INSERT INTO sch_bkc.ItemCarteira VALUES (@Endereco, @CodigoMoeda, @Quantidade)		
 	END
 RETURN
 
